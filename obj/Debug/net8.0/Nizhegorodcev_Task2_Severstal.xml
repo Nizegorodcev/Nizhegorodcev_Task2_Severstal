@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nizhegorodcev_Task2_Severstal</name>
+    </assembly>
+    <members>
+        <member name="T:Nizhegorodcev_Task2_Severstal.Controllers.RollsController">
+            <summary>
+            Контроллер для управления рулонами металла на складе
+            </summary>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Controllers.RollsController.GetRolls(Nizhegorodcev_Task2_Severstal.DTOs.Requests.RollFilterRequest)">
+            <summary>
+            Получить список всех рулонов с возможностью фильтрации
+            </summary>
+            <param name="filter">Параметры фильтрации (опционально)</param>
+            <returns>Список рулонов</returns>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Controllers.RollsController.GetRoll(System.Int32)">
+            <summary>
+            Получить рулон по ID
+            </summary>
+            <param name="id">Идентификатор рулона</param>
+            <returns>Рулон</returns>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Controllers.RollsController.CreateRoll(Nizhegorodcev_Task2_Severstal.DTOs.Requests.CreateRollRequest)">
+            <summary>
+            Добавить новый рулон на склад
+            </summary>
+            <param name="request">Данные нового рулона</param>
+            <returns>Созданный рулон</returns>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Controllers.RollsController.DeleteRoll(System.Int32)">
+            <summary>
+            Удалить рулон по ID (мягкое удаление)
+            </summary>
+            <param name="id">Идентификатор рулона</param>
+            <returns>Удаленный рулон</returns>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Controllers.RollsController.UpdateRoll(System.Int32,Nizhegorodcev_Task2_Severstal.DTOs.Requests.UpdateRollRequest)">
+            <summary>
+            Обновить параметры рулона
+            </summary>
+            <param name="id">Идентификатор рулона</param>
+            <param name="request">Новые параметры</param>
+            <returns>Обновленный рулон</returns>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Controllers.RollsController.GetStatistics(Nizhegorodcev_Task2_Severstal.DTOs.Requests.StatisticsRequest)">
+            <summary>
+            Получить статистику по рулонам за период
+            </summary>
+            <param name="request">Период (начальная и конечная дата)</param>
+            <returns>Статистика</returns>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Controllers.RollsController.ToResponse(Nizhegorodcev_Task2_Severstal.Models.MetalRoll)">
+            <summary>
+            Преобразование модели в DTO ответа
+            </summary>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.DTOs.Requests.CreateRollRequest">
+            <summary>
+            Запрос на создание нового рулона
+            </summary>
+            <example>
+            {
+              "length": 10.5,
+              "weight": 2.3
+            }
+            </example>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.DTOs.Requests.CreateRollRequest.Length">
+            <summary>
+            Длина рулона в метрах
+            </summary>
+            <example>10.5</example>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.DTOs.Requests.CreateRollRequest.Weight">
+            <summary>
+            Вес рулона в тоннах
+            </summary>
+            <example>2.3</example>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.DTOs.Requests.RollFilterRequest">
+            <summary>
+            Фильтр для поиска рулонов
+            </summary>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.DTOs.Requests.UpdateRollRequest">
+            <summary>
+            Запрос на обновление рулона
+            </summary>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.DTOs.Requests.UpdateRollRequest.Length">
+            <summary>
+            Новая длина рулона
+            </summary>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.DTOs.Requests.UpdateRollRequest.Weight">
+            <summary>
+            Новый вес рулона
+            </summary>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.DTOs.Responses.RollResponse">
+            <summary>
+            Ответ с данными рулона
+            </summary>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.Models.MetalRoll">
+            <summary>
+            Рулон металла на складе.
+            Инварианты:
+            1. Длина и вес должны быть положительными
+            2. Нельзя удалить уже удаленный рулон
+            3. Нельзя изменить удаленный рулон
+            </summary>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.Models.MetalRoll.Length">
+            <summary>
+            Длина рулона (метры)
+            </summary>
+            <exception cref="T:Nizhegorodcev_Task2_Severstal.Models.DomainException">При попытке установить неположительное значение</exception>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.Models.MetalRoll.Weight">
+            <summary>
+            Вес рулона (тонны)
+            </summary>
+            <exception cref="T:Nizhegorodcev_Task2_Severstal.Models.DomainException">При попытке установить неположительное значение</exception>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Models.MetalRoll.#ctor(System.Decimal,System.Decimal)">
+            <summary>
+            Создание нового рулона
+            </summary>
+            <param name="length">Длина (м), > 0</param>
+            <param name="weight">Вес (т), > 0</param>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Models.MetalRoll.Update(System.Decimal,System.Decimal)">
+            <summary>
+            Обновление параметров рулона
+            </summary>
+            <exception cref="T:Nizhegorodcev_Task2_Severstal.Models.DomainException">При попытке изменить удаленный рулон</exception>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Models.MetalRoll.MarkAsDeleted">
+            <summary>
+            Мягкое удаление рулона
+            </summary>
+            <exception cref="T:Nizhegorodcev_Task2_Severstal.Models.DomainException">При попытке удалить уже удаленный рулон</exception>
+        </member>
+        <member name="M:Nizhegorodcev_Task2_Severstal.Models.MetalRoll.Restore">
+            <summary>
+            Восстановление удаленного рулона
+            </summary>
+            <exception cref="T:Nizhegorodcev_Task2_Severstal.Models.DomainException">При попытке восстановить неудаленный рулон</exception>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.Models.Entity">
+            <summary>
+            Базовый класс для всех сущностей
+            </summary>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.Models.DomainException">
+            <summary>
+            Исключение предметной области
+            </summary>
+        </member>
+        <member name="T:Nizhegorodcev_Task2_Severstal.Properties.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.Properties.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.Properties.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:Nizhegorodcev_Task2_Severstal.Properties.Resources.DB_PASSWORD">
+            <summary>
+              Ищет локализованную строку, похожую на 1234.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,6 @@
+@Nizhegorodcev_Task2_Severstal_HostAddress = http://localhost:5213
+
+GET {{Nizhegorodcev_Task2_Severstal_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
